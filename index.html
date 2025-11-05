@@ -37,6 +37,22 @@
           <option value="suncare">Suncare</option>
           <option value="fragrance">Fragrance</option>
         </select>
+
+        <!-- New: product search input (filters by name/brand/description) -->
+        <input
+          id="productSearch"
+          type="search"
+          placeholder="Search products by name or keyword…"
+          aria-label="Search products"
+          style="
+            margin-left: 12px;
+            padding: 12px;
+            font-size: 16px;
+            width: 320px;
+            border: 2px solid #000;
+            border-radius: 8px;
+          "
+        />
       </div>
 
       <!-- Products Grid -->
@@ -46,9 +62,18 @@
       <div class="selected-products">
         <h2>Selected Products</h2>
         <div id="selectedProductsList"></div>
-        <button id="generateRoutine" class="generate-btn">
-          <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Routine
-        </button>
+        <div style="display: flex; gap: 10px; flex-direction: column">
+          <button id="generateRoutine" class="generate-btn">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Routine
+          </button>
+          <button
+            id="clearSelections"
+            class="generate-btn"
+            style="background: #ff6b6b"
+          >
+            <i class="fa-solid fa-trash-can"></i> Clear Selections
+          </button>
+        </div>
       </div>
 
       <!------- Chat Area ------->

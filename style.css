@@ -71,14 +71,110 @@ body {
   margin-bottom: 20px;
 }
 
+/* Chat-style message bubbles */
 .chat-window {
-  padding: 20px;
-  font-size: 18px;
-  line-height: 1.5;
-  height: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  height: 320px; /* slightly larger to feel like a chat */
   overflow-y: auto;
   background: #fafafa;
-  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+/* single message wrapper */
+.message {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+/* make messages visible after rendering (JS will force computed style) */
+.message.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* assistant messages left, user messages right */
+.message-assistant {
+  justify-content: flex-start;
+}
+.message-user {
+  justify-content: flex-end;
+}
+
+/* avatar for assistant */
+.message-assistant .avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* bubble styling */
+.bubble {
+  max-width: 72%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  line-height: 1.35;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+}
+
+/* assistant bubble: white panel with border (matches page) */
+.message-assistant .bubble {
+  background: #fff;
+  color: #222;
+  border: 1px solid #e6e6e6;
+  border-radius: 16px 16px 16px 6px;
+}
+
+/* user bubble: dark filled bubble */
+.message-user .bubble {
+  background: #000;
+  color: #fff;
+  border-radius: 16px 16px 6px 16px;
+  text-align: right;
+}
+
+/* ensure <pre> content inside bubble looks good */
+.bubble pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 14px;
+  color: inherit;
+}
+
+/* message meta (timestamp) */
+.meta {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #888;
+  display: block;
+}
+
+/* small adjustments for mobile */
+@media (max-width: 600px) {
+  .bubble {
+    max-width: 86%;
+    font-size: 13px;
+  }
+  .chat-window {
+    height: 300px;
+    padding: 12px;
+  }
 }
 
 /* placeholder message */
@@ -186,6 +282,8 @@ body {
   display: flex;
   gap: 15px;
   min-height: 160px;
+  position: relative;
+  overflow: hidden; /* overlay stays within the same box */
 }
 
 .product-card img {
@@ -211,6 +309,46 @@ body {
 .product-card p {
   font-size: 14px;
   color: #666;
+}
+
+/* full-card description overlay (hidden by default) */
+.product-desc {
+  position: absolute;
+  inset: 0; /* cover entire card */
+  background: #fff; /* match page: white panel */
+  color: #222; /* dark text to match page */
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 180ms ease, transform 180ms ease;
+  z-index: 6;
+  pointer-events: none; /* avoid blocking clicks when hidden */
+  text-align: left;
+  display: flex;
+  align-items: flex-start; /* content flows from top */
+  border: 2px solid #000; /* strong page border consistent with other panels */
+  border-radius: 4px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06); /* subtle shadow like other elements */
+}
+
+/* reveal overlay on hover and focus, enable interactions so users can scroll/select text */
+.product-card:hover .product-desc,
+.product-card:focus-within .product-desc,
+.product-card:focus .product-desc {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ensure overlay is usable on small screens */
+@media (max-width: 480px) {
+  .product-desc {
+    padding: 12px;
+    font-size: 13px;
+  }
 }
 
 /* selected products */
