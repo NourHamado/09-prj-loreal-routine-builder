@@ -1,4 +1,3 @@
 # Project 9: L'Oréal Routine Builder
-L’Oréal is expanding what’s possible with AI, and now your chatbot is getting smarter. This week, you’ll upgrade it into a product-aware routine builder. 
 
-Users will be able to browse real L’Oréal brand products, select the ones they want, and generate a personalized routine using AI. They can also ask follow-up questions about their routine—just like chatting with a real advisor.
+Develop an AI-powered skincare assistant that helps users browse real L’Oréal products, select items that fit their needs, and generate personalized skincare routines using AI. The application also supports follow-up conversations, allowing users to ask questions about their routine and receive tailored product recommendations and guidance through a conversational interface.
